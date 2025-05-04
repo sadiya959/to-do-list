@@ -1,3 +1,144 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body{
+    background: linear-gradient(to right, #E9EDEE 0%, #FFFFFF 100%);
+    font-family: "Roboto", sans-serif;
+    color: rgb(27, 27, 60);
+}
+
+
+
+
+
+.todo-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    width: 40rem;
+    margin: 0 auto;
+    height: auto;
+    margin-top: 1rem;
+}
+
+
+
+
+h1{
+   font-size: 2rem;
+   display: flex;
+   flex-direction: column;
+   font-weight: 500;
+   padding: 2rem 0;
+   gap: .3rem;
+}
+
+
+h1 i{
+    font-size: 1.2rem;
+}
+
+#date{
+    font-size: 1rem;
+    color: #7c7c7c;
+    font-weight: 400;
+}
+
+
+
+
+
+
+
+
+
+#todo-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#todo-input{
+    width: 80%;
+    height: 3rem;
+    border: none;
+    background-color: #eaeaea;
+    padding: 0 .5rem;
+    border-radius: 8px;
+}
+
+
+#todo-input:focus{
+    outline: 1px solid rgb(196, 164, 225);
+}
+
+#todo-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+
 .todo-item{
-    background-color: aquamarine;
+    background-color: #fff;
+    width: 80%;
+    list-style: none;
+    height: 3rem;
+    border-radius: 8px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 1rem;
+   padding: 0 .5rem;
+
+}
+
+.text-check{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.text-check span{
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.complete-checkbox{
+     width: 1.5rem;
+     height: 1.2rem;
+}
+
+
+
+
+.btns button {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+.btns button i{
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    border: none;
+}
+
+
+
+.todo-item.completed .taskText{
+    text-decoration: line-through;
+    color: gray;
 }

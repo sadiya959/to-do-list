@@ -1,31 +1,64 @@
 const todoInput = document.querySelector("#todo-input");
 const todoForm = document.querySelector("#todo-form");
 const todoList = document.querySelector("#todo-list");
+const date = document.querySelector("#date");
+
+document.addEventListener("DOMContentLoaded", loadTasks);
+
+function loadTasks() {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.forEach((task) => {
+    addTaskToDOM(task);
+  });
+}
+
+const today = new Date();
+
+const options = {
+  weekday: "long",
+  month: "short",
+  day: "numeric",
+};
+
+date.textContent = " it's " + today.toLocaleDateString("en-US", options);
 
 todoForm.addEventListener("submit", addTask);
 
 function addTask(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const taskText = todoInput.value.trim();
+  const taskText = todoInput.value.trim();
 
-    if (taskText !== "") {
-        const task = {
-            id: Date.now(),
-            text: taskText,
-            completed: false,
-        };
-        addTaskToDOM(task);
-        todoInput.value = "";
-    }
+  if (taskText !== "") {
+    const task = {
+      id: Date.now(),
+      text: taskText,
+      completed: false,
+    };
+    addTaskToDOM(task);
+    saveTasksToLocalStorge(task);
+    todoInput.value = "";
+  }
 }
 
 function addTaskToDOM(task) {
-    const listItem = document.createElement("li");
-    listItem.classList.add("todo-item");
-    listItem.dataset.id = task.id;
+  const listItem = document.createElement("li");
+  listItem.className = `todo-item ${task.completed ? "completed" : ""}`;
+  listItem.dataset.id = task.id;
 
-    listItem.innerHTML = `<input type="checkbox" class="complete-checkbox"> <span>${task.text}</span> <button class="edit-btn">Edit</button> <button class="delete-btn">Delete</button>`;
+  listItem.innerHTML = `<div class="text-check"><input id="complete" type="checkbox" class="complete-checkbox"> <span class="taskText">${task.text}</span></div> <div class="btns"><button class="edit-btn"><i class="bi bi-pencil-square"></i></button> <button class="delete-btn"><i class="bi bi-trash3"></i></button</div>`;
 
-    todoList.append(listItem);
+  todoList.append(listItem);
+}
+
+function saveTasksToLocalStorge(task) {
+  const oldTasks = getTasksFromLocalStorage();
+  oldTasks.push(task);
+  localStorage.setItem("tasks", JSON.stringify(oldTasks));
+}
+
+function getTasksFromLocalStorage() {
+  const oldTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  return oldTasks;
 }
